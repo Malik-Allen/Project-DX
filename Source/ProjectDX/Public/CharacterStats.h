@@ -35,10 +35,13 @@ public:
 		float Get_NewValue() const { return new_value; }
 
 	UFUNCTION(BlueprintCallable, Category = "Attribute")
+		float Get_OldValue() const { return old_value; }
+
+	UFUNCTION(BlueprintCallable, Category = "Attribute")
 		float Get_Difference() const { return difference; }
 
 	UFUNCTION(BlueprintCallable, Category = "Attribute")
-		EChangeType Get_ChangeType() const { return change_type; }
+		EValueType Get_ChangeType() const { return value_type; }
 
 	/*Setters for attribute class*/
 	UFUNCTION(BlueprintCallable, Category = "Attribute")
@@ -49,16 +52,21 @@ public:
 		void Set_BaseValue(float new_base_value);
 
 	UFUNCTION(BlueprintCallable, Category = "Attribute")
-		// Make an Subtractive Change to this stat
-		void Calaculate_StateChange(EComputativeType new_computative_type, EChangeType new_change_type, float value);
+		// Calculate stat changes, populating difference and new stat values
+		void Calaculate_StatChange(EComputativeType new_computative_type, EValueType new_type_of_value, float value);
+
+	UFUNCTION(BlueprintCallable, Category = "Attribute")
+		// Applies the changes to stats keeping the differences
+		void Apply_StatChange(EComputativeType new_computative_type, EValueType new_type_of_value, float value);
 
 
 private:
 	EAttributeType type;
 	float base_value;
 	float new_value;
+	float old_value;
 	float difference;
-	EChangeType change_type;
+	EValueType value_type;
 	EComputativeType computative_type;
 };
 

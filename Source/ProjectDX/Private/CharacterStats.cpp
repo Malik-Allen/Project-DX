@@ -7,8 +7,8 @@
 
 UAttribute::UAttribute() : 
 	type(EAttributeType::HealthPoints),
-	base_value(0.0f), new_value(0.0f), difference(0.0f),
-	change_type(EChangeType::FixedValue), computative_type(EComputativeType::Additive)
+	base_value(100.0f), new_value(0.0f), old_value(0.0f), difference(0.0f),
+	value_type(EValueType::FixedValue), computative_type(EComputativeType::Additive)
 {}
 
 UAttribute::~UAttribute() {}
@@ -21,18 +21,18 @@ void UAttribute::Set_BaseValue(float new_base_value) {
 	base_value = new_base_value;
 }
 
-void UAttribute::Calaculate_StateChange(EComputativeType new_computative_type, EChangeType new_change_type, float value) {
-	change_type = new_change_type;
+void UAttribute::Calaculate_StatChange(EComputativeType new_computative_type, EValueType new_value_type, float value) {
+	value_type = new_value_type;
 	computative_type = new_computative_type;
 
 	if (computative_type == EComputativeType::Additive) {	// Additive Stat Change
-		if (change_type == EChangeType::FixedValue) {
+		if (value_type == EValueType::FixedValue) {
 			new_value = base_value + value;
 			if (new_value < 0.0f)
 				new_value = 0;
 			difference = new_value - base_value;
 		}
-		else if (change_type == EChangeType::Percentage) {
+		else if (value_type == EValueType::Percentage) {
 			new_value = base_value + (base_value * (value / 100.0f));
 			difference = new_value - base_value;
 		}
@@ -42,13 +42,13 @@ void UAttribute::Calaculate_StateChange(EComputativeType new_computative_type, E
 		}
 	}
 	else if (computative_type == EComputativeType::Subtractive) {	// Subtractive Stat Change
-		if (change_type == EChangeType::FixedValue) {
+		if (value_type == EValueType::FixedValue) {
 			new_value = base_value - value;
 			if (new_value < 0.0f)
 				new_value = 0;
 			difference = new_value - base_value;
 		}
-		else if (change_type == EChangeType::Percentage) {
+		else if (value_type == EValueType::Percentage) {
 			new_value = base_value - (base_value * (value / 100.0f));
 			difference = new_value - base_value;
 		}
@@ -58,13 +58,13 @@ void UAttribute::Calaculate_StateChange(EComputativeType new_computative_type, E
 		}
 	}
 	else if (computative_type == EComputativeType::Multiplicative) {	// Multiplicative Stat Change
-		if (change_type == EChangeType::FixedValue) {
+		if (value_type == EValueType::FixedValue) {
 			new_value = base_value * value;
 			if (new_value < 0.0f)
 				new_value = 0;
 			difference = new_value - base_value;
 		}
-		else if (change_type == EChangeType::Percentage) {
+		else if (value_type == EValueType::Percentage) {
 			new_value = base_value * (base_value * (value / 100.0f));
 			difference = new_value - base_value;
 		}
@@ -74,13 +74,13 @@ void UAttribute::Calaculate_StateChange(EComputativeType new_computative_type, E
 		}
 	}
 	else if (computative_type == EComputativeType::Divisive) {			// Divisive Stat Change
-		if (change_type == EChangeType::FixedValue) {
+		if (value_type == EValueType::FixedValue) {
 			new_value = base_value / value;
 			if (new_value < 0.0f)
 				new_value = 0;
 			difference = new_value - base_value;
 		}
-		else if (change_type == EChangeType::Percentage) {
+		else if (value_type == EValueType::Percentage) {
 			new_value = base_value / (base_value * (value / 100.0f));
 			difference = new_value - base_value;
 		}
@@ -92,6 +92,11 @@ void UAttribute::Calaculate_StateChange(EComputativeType new_computative_type, E
 	
 }
 
+void UAttribute::Apply_StatChange(EComputativeType new_computative_type, EValueType new_value_type, float value) {
+	Calaculate_StatChange(new_computative_type, new_value_type, value);
+	old_value = base_value;
+	base_value = new_value;
+}
 
 UCharacterStats::UCharacterStats() :
 	HealthPoints(nullptr), ActionPoints(nullptr), Mobility(nullptr),

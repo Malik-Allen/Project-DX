@@ -34,10 +34,24 @@ enum class EComputativeType : uint8 {
 };
 
 UENUM()
-enum class EChangeType : uint8 {
+enum class EValueType : uint8 {
 	FixedValue		UMETA(DisplayName = "Fixed Value"),
 	Percentage		UMETA(DisplayName = "Percentage")
 };
+
+UENUM(BlueprintType)
+enum class EEffectType : uint8 {
+	Immediate		UMETA(DisplayName = "Immediate"),
+	Passive			UMETA(DisplayName = "Passive"),
+	Active			UMETA(DisplayName = "Active")
+};
+
+UENUM()
+enum class EModifierType : uint8 {
+	Damage			UMETA(DisplayName = "Damage"),
+	Healing			UMETA(DisplayName = "Healing")
+};
+
 
 UENUM(BlueprintType)
 enum class EElementalType : uint8 {

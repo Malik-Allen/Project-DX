@@ -13,14 +13,16 @@ ADXCharacter::ADXCharacter() :
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	character_stats = NewObject<UCharacterStats>();
+	
 }
 
 // Called when the game starts or when spawned
 void ADXCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	character_stats = NewObject<UCharacterStats>();
+	if (character_stats)
+		character_stats->Init_Attributes();
 }
 
 // Called every frame
