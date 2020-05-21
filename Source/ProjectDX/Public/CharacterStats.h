@@ -43,6 +43,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Attribute")
 		EValueType Get_ChangeType() const { return value_type; }
 
+	UFUNCTION(BlueprintCallable, Category = "Attribute")
+		FString Get_Name() const { return name; }
+
+	UFUNCTION(BlueprintCallable, Category = "Attribute")
+		void Set_Name(FString new_name) { name =  new_name; }
+
 	/*Setters for attribute class*/
 	UFUNCTION(BlueprintCallable, Category = "Attribute")
 		void Set_AttributeType(EAttributeType new_type);
@@ -59,6 +65,8 @@ public:
 		// Applies the changes to stats keeping the differences
 		void Apply_StatChange(EComputativeType new_computative_type, EValueType new_type_of_value, float value);
 
+	
+
 
 private:
 	EAttributeType type;
@@ -68,6 +76,7 @@ private:
 	float difference;
 	EValueType value_type;
 	EComputativeType computative_type;
+	FString name;
 };
 
 UCLASS(BlueprintType)
@@ -102,6 +111,8 @@ public:
 		UAttribute* Rank;
 	UPROPERTY(BlueprintReadWrite, Category = "Character Stats")
 		UAttribute* TurnOrder;
+
+	TArray<UAttribute*> All_Attributes;
 
 	
 	void Init_Attributes();

@@ -22,7 +22,8 @@ enum class EAttributeType : uint8 {
 	ExperiencePoints	UMETA(DisplayName = "Experience Points"),
 	ThrowPower			UMETA(DisplayName = "Throw Power"),
 	Rank				UMETA(DisplayName = "Rank"),
-	TurnOrder			UMETA(DisplayName = "Turn Order")
+	TurnOrder			UMETA(DisplayName = "Turn Order"),
+	All_Attributes		UMETA(DisplayName = "All Attributes")
 };
 
 UENUM()

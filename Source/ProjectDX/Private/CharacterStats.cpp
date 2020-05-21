@@ -8,7 +8,8 @@
 UAttribute::UAttribute() : 
 	type(EAttributeType::HealthPoints),
 	base_value(100.0f), new_value(0.0f), old_value(0.0f), difference(0.0f),
-	value_type(EValueType::FixedValue), computative_type(EComputativeType::Additive)
+	value_type(EValueType::FixedValue), computative_type(EComputativeType::Additive),
+	name("HP")
 {}
 
 UAttribute::~UAttribute() {}
@@ -125,26 +126,70 @@ void UCharacterStats::Init_Attributes() {
 	Rank = NewObject<UAttribute>();
 	TurnOrder = NewObject<UAttribute>();
 
-	if (HealthPoints)
+	if (HealthPoints) {
 		HealthPoints->Set_AttributeType(EAttributeType::HealthPoints);
-	if (ActionPoints)
+		HealthPoints->Set_Name("HP");
+		All_Attributes.Add(HealthPoints);
+	}
+		
+	if (ActionPoints) {
 		ActionPoints->Set_AttributeType(EAttributeType::ActionPoints);
-	if (Mobility)
+		ActionPoints->Set_Name("AP");
+		All_Attributes.Add(ActionPoints);
+	}
+
+	if (Mobility) {
 		Mobility->Set_AttributeType(EAttributeType::Mobility);
-	if (Attack)
+		Mobility->Set_Name("Movement");
+		All_Attributes.Add(Mobility);
+	}
+
+	if (Attack) {
 		Attack->Set_AttributeType(EAttributeType::Attack);
-	if (Defense)
+		Attack->Set_Name("Attack");
+		All_Attributes.Add(Attack);
+	}
+		
+	if (Defense) {
 		Defense->Set_AttributeType(EAttributeType::Defense);
-	if (Armor)
+		Defense->Set_Name("Defense");
+		All_Attributes.Add(Defense);
+	}
+
+	if (Armor) {
 		Armor->Set_AttributeType(EAttributeType::Armor);
-	if (CriticalChance)
+		Armor->Set_Name("Armor");
+		All_Attributes.Add(Armor);
+	}
+
+	if (CriticalChance) {
 		CriticalChance->Set_AttributeType(EAttributeType::CriticalChance);
-	if (ExperiencePoints)
+		CriticalChance->Set_Name("Crit");
+		All_Attributes.Add(CriticalChance);
+	}
+
+	if (ExperiencePoints) {
 		ExperiencePoints->Set_AttributeType(EAttributeType::ExperiencePoints);
-	if (ThrowPower)
+		ExperiencePoints->Set_Name("XP");
+		All_Attributes.Add(ExperiencePoints);
+	}
+		
+	if (ThrowPower) {
 		ThrowPower->Set_AttributeType(EAttributeType::ThrowPower);
-	if (Rank)
+		ThrowPower->Set_Name("Throw");
+		All_Attributes.Add(ThrowPower);
+	}
+		
+	if (Rank) {
 		Rank->Set_AttributeType(EAttributeType::Rank);
-	if (TurnOrder)
+		Rank->Set_Name("Rank");
+		All_Attributes.Add(Rank);
+	}
+		
+	if (TurnOrder) {
 		TurnOrder->Set_AttributeType(EAttributeType::TurnOrder);
+		TurnOrder->Set_Name("Order");
+		 // All_Attributes.Add(TurnOrder);, Turn Order will not be a stat that is traditionally assigned with the group of other
+	}
+
 }

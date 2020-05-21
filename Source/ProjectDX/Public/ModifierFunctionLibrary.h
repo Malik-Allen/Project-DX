@@ -18,6 +18,6 @@ class PROJECTDX_API UModifierFunctionLibrary : public UBlueprintFunctionLibrary
 public:
 
 	UFUNCTION(BlueprintCallable)
-		static void Apply_Mod(UObject* Origin, ADXCharacter* Target, EModifierType TypeOfModifier, EValueType TypeOfValue, float Value);
+		static void Apply_Mod(UObject* Origin, ADXCharacter* Target, EModifierType TypeOfModifier, TArray<EAttributeType> effectedAttributes, EValueType TypeOfValue, float Value);
 	
 };
