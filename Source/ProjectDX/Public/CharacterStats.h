@@ -65,10 +65,8 @@ public:
 		// Applies the changes to stats keeping the differences
 		void Apply_StatChange(EComputativeType new_computative_type, EValueType new_type_of_value, float value);
 
-	
-
-
 private:
+
 	EAttributeType type;
 	float base_value;
 	float new_value;
@@ -113,7 +111,6 @@ public:
 		UAttribute* TurnOrder;
 
 	TArray<UAttribute*> All_Attributes;
-
 	
 	void Init_Attributes();
 

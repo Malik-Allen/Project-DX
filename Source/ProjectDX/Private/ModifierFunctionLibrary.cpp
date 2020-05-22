@@ -40,14 +40,22 @@ void UModifierFunctionLibrary::Apply_Mod(UObject* Origin, ADXCharacter* Target, 
 
 	UAttribute* targetAttribute = nullptr;
 	Modifier* modifier = nullptr;
+	ModifierManager* mod_manager = Target->modifier_manager;
+	if (mod_manager == nullptr) {
+		if (GEngine)
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, "Warning! Mod Manager is null");
+		Target->Init_ModifierManager();
+
+	}
 
 	if (isAllAttributes) {											// If All attributes were selected, modifier is applied to them all instead of checking for specific attributes
 		if (GEngine)
-			GEngine->AddOnScreenDebugMessage(-1, 25.0f, FColor::Red, "All Attrbutes Selected to be modified");
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Cyan, "All Attrbutes Selected to be modified");
 
 		for (UAttribute* attribute : targetStats->All_Attributes) {
 			modifier = new Modifier(TypeOfModifier, Origin, attribute, TypeOfValue, Value);
 			modifier->Activate();
+			mod_manager->modifiers.Add(modifier);
 		}
 
 		return;
@@ -83,7 +91,7 @@ void UModifierFunctionLibrary::Apply_Mod(UObject* Origin, ADXCharacter* Target, 
 
 		modifier = new Modifier(TypeOfModifier, Origin, targetAttribute, TypeOfValue, Value);
 		modifier->Activate();
-		
+		mod_manager->modifiers.Add(modifier);
 	}
 
 }

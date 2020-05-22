@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameplayDefinitions.h"
 #include "CharacterStats.h"
 
 
@@ -18,11 +17,6 @@ public:
 	virtual void Remove() = 0;
 };
 
-class ModifierManager {
-
-};
-
-
 
 /*
 Modifier Class is used to applied changes to attributes
@@ -30,11 +24,10 @@ Can have an immediate effect, passive or active effect on each turn
 Contains a reference to whom originated this modifier as well as a ref to the modified data
 */ 
 class Modifier {	
-	~Modifier();
 public:
 
 	Modifier(EModifierType new_modifier_type, UObject* new_origin, UAttribute* new_modified_data, EValueType new_value_type, float new_value);
-	
+	~Modifier();
 	
 	void Activate();
 	void Remove();
@@ -77,5 +70,20 @@ private:
 	
 };
 
+
+class ModifierManager {
+
+public:
+	ModifierManager();
+	~ModifierManager();
+
+	TArray<Modifier*> modifiers;
+
+	// Applies all the effects of modifiers onto their target attributes, updates the life time of modifiers, and finally removes all inactive modifiers from vector of modifiers
+	void Update();
+
+	// Removes all modifiers from the vector of modifiers
+	void ClearAll();
+};
 
 

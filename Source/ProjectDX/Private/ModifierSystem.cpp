@@ -26,7 +26,7 @@ Modifier::Modifier(EModifierType new_modifier_type, UObject* new_origin, UAttrib
 	Assign_Modifier_Variables();
 }
 
-
+// Based on the Type of Modifier the class variables will be assigned their values
 void Modifier::Assign_Modifier_Variables() {
 
 	if (modifier_type == EModifierType::Damage) {				// Damage Modifier
@@ -40,6 +40,13 @@ void Modifier::Assign_Modifier_Variables() {
 		computative_type = EComputativeType::Additive;
 		effect_lifetime = 0;
 	}
+
+	else if (modifier_type == EModifierType::Poison) {			// Poison Modifier
+		effect_type = EEffectType::Active;
+		computative_type = EComputativeType::Subtractive;
+		effect_lifetime = 3;
+	}
+	
 
 }
 
@@ -102,3 +109,39 @@ void Modifier::Update() {
 	}
 	
 }
+
+
+ModifierManager::ModifierManager() {}
+
+ModifierManager::~ModifierManager() {
+	ClearAll();
+}
+
+// Applies all the effects of modifiers onto their target attributes, updates the life time of modifiers, and finally removes all inactive modifiers from vector of modifiers
+void ModifierManager::Update() {
+	for (Modifier* Mod : modifiers)
+		Mod->Update();
+
+	bool HasRemovedAllInactiveModifiers = false;				// Loop that will keep traversing the modifiers vector until it has removed all in active modifiers
+	while (!HasRemovedAllInactiveModifiers) {
+		HasRemovedAllInactiveModifiers = true;
+		for (int i = 0; i < modifiers.Num(); i++) {
+			if (modifiers[i]->isActivated == false) {
+				modifiers.RemoveAt(i);
+				HasRemovedAllInactiveModifiers = false;
+				break;
+			}	
+		}
+	}
+
+}
+
+// Removes all modifiers from the vector of modifiers
+void ModifierManager::ClearAll() {
+	for (Modifier* Mod : modifiers)
+		Mod->Remove();
+
+	modifiers.Empty();
+}
+
+

@@ -4,17 +4,19 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "CharacterStats.h"
+#include "TurnInterface.h"
+#include "ModifierSystem.h"
 #include "DXCharacter.generated.h"
 
 UCLASS()
-class PROJECTDX_API ADXCharacter : public ACharacter
+class PROJECTDX_API ADXCharacter : public ACharacter, public ITurnInterface
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this character's properties
 	ADXCharacter();
+	~ADXCharacter();
 
 protected:
 	// Called when the game starts or when spawned
@@ -38,5 +40,15 @@ public:
 	// Abilities Vector
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Character")
 		FVector position_on_grid;
+
+	ModifierManager* modifier_manager;
+	void Init_CharacterStats();
+	void Init_ModifierManager();
+
+	// Called at the begining of each turn by Turn Game Mode, when its this players turn
+	virtual void Begin_Turn_Implementation() override;
+
+	// Called at the end of each turn by Turn Game Mode, when its this player ends their turn
+	virtual void End_Turn_Implementation() override;
 
 };

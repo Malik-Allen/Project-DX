@@ -2,6 +2,7 @@
 
 
 #include "TurnBasedGameMode.h"
+#include "TurnInterface.h"
 
 ATurnBasedGameMode::ATurnBasedGameMode() :
 	Active_Character(nullptr),
@@ -17,6 +18,7 @@ ATurnBasedGameMode::ATurnBasedGameMode() :
 
 ATurnBasedGameMode::~ATurnBasedGameMode() {}
 
+// Used to add a character to the desired team
 void ATurnBasedGameMode::AddCharacterToTeam(ETeamNumber teamNumber, ADXCharacter* character) {
 	if (character == nullptr) return;
 
@@ -35,6 +37,7 @@ void ATurnBasedGameMode::AddCharacterToTeam(ETeamNumber teamNumber, ADXCharacter
 
 }
 
+// Will combine both team lists into the combined list with ordering
 void ATurnBasedGameMode::OrderList(TArray<ADXCharacter*> list) {
 	priority_queue->Clear();
 	if (list.Num() == 0) return;
@@ -59,6 +62,7 @@ void ATurnBasedGameMode::OrderList(TArray<ADXCharacter*> list) {
 	}
 }
 
+// Sets Active Character to the next up character from the combined list
 void ATurnBasedGameMode::AddTeamsToCombinedList(ETeamNumber first_team) {
 	FirstTeam = first_team;
 	TArray<ADXCharacter*> first;
@@ -103,11 +107,23 @@ void ATurnBasedGameMode::Next_Turn() {
 		combined_ordered_list.RemoveAt(0);
 		combined_ordered_list.Add(temp);
 	}
-
 	
 	for (int i = 0; i < combined_ordered_list.Num(); i++) {
-		combined_ordered_list[i]->turn_order = i;	// Gives each player its position in the array as the turn order
+		combined_ordered_list[i]->turn_order = i;										// Gives each player its position in the array as the turn order
 	}
 
 	OrderList(combined_ordered_list);
+
+	ITurnInterface* turn_interface = Cast<ITurnInterface>(Active_Character);			// Now that this list has been order, we can call begin turn
+	if (turn_interface)
+		turn_interface->Execute_Begin_Turn(Active_Character);
+}
+
+// Returns true if all requirements for the game mode have been met, false if not
+bool ATurnBasedGameMode::OnBeginGame_Implementation() {
+	// Call Next Turn to set up the first player in the ordered list
+	// Posses that player with the player controller
+	// Add a call to apply all passive modifiers/ abilities(once that has been set up)
+
+	return true;
 }

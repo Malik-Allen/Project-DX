@@ -104,9 +104,7 @@ UCharacterStats::UCharacterStats() :
 	Attack(nullptr), Defense(nullptr), Armor(nullptr),
 	CriticalChance(nullptr), ExperiencePoints(nullptr), ThrowPower(nullptr),
 	Rank(nullptr), TurnOrder(nullptr)
-{
-	Init_Attributes();
-}
+{}
 
 UCharacterStats::~UCharacterStats() {}
 

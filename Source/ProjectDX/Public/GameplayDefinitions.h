@@ -50,7 +50,8 @@ enum class EEffectType : uint8 {
 UENUM()
 enum class EModifierType : uint8 {
 	Damage			UMETA(DisplayName = "Damage"),
-	Healing			UMETA(DisplayName = "Healing")
+	Healing			UMETA(DisplayName = "Healing"),
+	Poison			UMETA(DisplayName = "Poison")
 };
 
 

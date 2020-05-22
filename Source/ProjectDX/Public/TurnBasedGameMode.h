@@ -43,6 +43,13 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "Turn Based")
 		// The Active Character, the current turn owner
 		ADXCharacter* Active_Character;
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Turn Based")
+		// Returns true if all requirements for the game mode have been met, false if not
+		bool OnBeginGame();
+
+	// Returns true if all requirements for the game mode have been met, false if not
+	virtual bool OnBeginGame_Implementation();
 	
 private:
 
