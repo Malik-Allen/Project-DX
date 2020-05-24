@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "CharacterStats.h"
+#include "GameplayDefinitions.h"
 
 
 
@@ -24,15 +24,10 @@ Can have an immediate effect, passive or active effect on each turn
 Contains a reference to whom originated this modifier as well as a ref to the modified data
 */ 
 class Modifier {	
-public:
 
-	Modifier(EModifierType new_modifier_type, UObject* new_origin, UAttribute* new_modified_data, EValueType new_value_type, float new_value);
-	~Modifier();
-	
-	void Activate();
-	void Remove();
-	void Update();
+	friend class ModifierManager;
 
+private:
 	// This modifier's type
 	EModifierType modifier_type;
 
@@ -40,7 +35,7 @@ public:
 	UObject* origin;
 
 	// The target data to be modified
-	UAttribute* modified_data;
+	class UAttribute* modified_data;
 
 	// Type of effect, Immediate(One time use), Passive(Activated and applied once for the duration of its lifecycle), 
 			// or Active(Activated and applied for each turn of its lifecycle)
@@ -61,13 +56,21 @@ public:
 	// Is this Ability Active
 	bool isActivated;
 
-
-private:
+	// Modifier's name
+	FString name;
 
 	// Based on the Type of Modifier the class variables will be assigned their values
 	void Assign_Modifier_Variables();
 
+public:
+
+	Modifier(EModifierType new_modifier_type, UObject* new_origin, UAttribute* new_modified_data, EValueType new_value_type, float new_value);
+	~Modifier();
 	
+	void Activate();
+	void Remove();
+	void Update();
+
 };
 
 

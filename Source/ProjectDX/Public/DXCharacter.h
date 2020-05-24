@@ -4,8 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+
 #include "TurnInterface.h"
+#include "GameplayDefinitions.h"
+#include "CharacterStats.h"
 #include "ModifierSystem.h"
+#include "AbilitySystem.h"
+
+#include "Tile.h"
+
 #include "DXCharacter.generated.h"
 
 UCLASS()
@@ -50,5 +57,7 @@ public:
 
 	// Called at the end of each turn by Turn Game Mode, when its this player ends their turn
 	virtual void End_Turn_Implementation() override;
+
+	UTile* current_tile;
 
 };

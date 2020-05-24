@@ -10,7 +10,8 @@ ADXCharacter::ADXCharacter() :
 	team_number(0),
 	character_stats(nullptr),
 	position_on_grid(FVector(0.0f)),
-	modifier_manager(nullptr)
+	modifier_manager(nullptr),
+	current_tile(nullptr)
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -45,7 +46,7 @@ void ADXCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 void ADXCharacter::Init_ModifierManager() {
 	modifier_manager = new ModifierManager();
 	if (GEngine)
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, "Initialized Modifier Manager");
+		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Green, name + " initialized Modifier Manager");
 }
 
 void ADXCharacter::Init_CharacterStats() {
@@ -53,7 +54,7 @@ void ADXCharacter::Init_CharacterStats() {
 	if (character_stats)
 		character_stats->Init_Attributes();
 	if (GEngine)
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, "Initialized Character Stats");
+		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Yellow, name + " initialized Character Stats");
 }
 
 // Called at the begining of each turn by Turn Game Mode, when its this players turn

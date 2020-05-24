@@ -3,7 +3,7 @@
 
 #include "ModifierSystem.h"
 #include "CharacterStats.h"
-#include "Engine.h"
+
 
 Modifier::~Modifier() {
 	isActivated = false;
@@ -21,7 +21,8 @@ Modifier::Modifier(EModifierType new_modifier_type, UObject* new_origin, UAttrib
 	computative_type(EComputativeType::Additive),
 	value(new_value),
 	value_type(new_value_type),
-	isActivated(false)
+	isActivated(false),
+	name("")
 {
 	Assign_Modifier_Variables();
 }
@@ -33,18 +34,21 @@ void Modifier::Assign_Modifier_Variables() {
 		effect_type = EEffectType::Immediate;
 		computative_type = EComputativeType::Subtractive;
 		effect_lifetime = 0;
+		name = "Damage";
 	}
 
 	else if (modifier_type == EModifierType::Healing) {			// Healing Modifier
 		effect_type = EEffectType::Immediate;
 		computative_type = EComputativeType::Additive;
 		effect_lifetime = 0;
+		name = "Healing";
 	}
 
 	else if (modifier_type == EModifierType::Poison) {			// Poison Modifier
 		effect_type = EEffectType::Active;
 		computative_type = EComputativeType::Subtractive;
 		effect_lifetime = 3;
+		name = "Poison";
 	}
 	
 
@@ -61,13 +65,13 @@ void Modifier::Activate() {
 
 	modified_data->Apply_StatChange(computative_type, value_type, value);
 
-	FString outputTxt = "Modifier Actiavted on: " + modified_data->Get_Name();
+	FString outputTxt = name + " Modifier Actiavted on: " + modified_data->Get_Name();
 	outputTxt.Append(" Old: " + FString::SanitizeFloat(modified_data->Get_OldValue()));
 	outputTxt.Append(" Cur: " + FString::SanitizeFloat(modified_data->Get_BaseValue()));
 	outputTxt.Append(" Diff: " + FString::SanitizeFloat(modified_data->Get_Difference()));
 
 	if (GEngine)
-		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Green, outputTxt);
+		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Green, outputTxt);
 
 	UE_LOG(LogTemp, Warning, TEXT("Mod Info: %s"), *outputTxt);
 
@@ -77,7 +81,7 @@ void Modifier::Activate() {
 
 void Modifier::Remove() {
 	if (GEngine)
-		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, "Removing Mod");
+		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Yellow, "Removing Mod");
 
 	isActivated = false; 
 	if (origin) origin = nullptr;
