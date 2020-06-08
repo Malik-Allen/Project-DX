@@ -13,15 +13,15 @@ UENUM(BlueprintType)
 // Attribute Types used in Character Stats
 enum class EAttributeType : uint8 {
 	HealthPoints		UMETA(DisplayName = "Health Points"),
-	ActionPoints		UMETA(DisplayName = "Action Points"),
-	Mobility			UMETA(DisplayName = "Mobility"),
+	ActionPoints		UMETA(DisplayName = "Action Points", Hidden),
+	Mobility			UMETA(DisplayName = "Mobility", Hidden),
 	Attack				UMETA(DisplayName = "Attack"),
 	Defense				UMETA(DisplayName = "Defense"),
 	Armor				UMETA(DisplayName = "Armor"),
 	CriticalChance		UMETA(DisplayName = "Critical Chance"),
 	ExperiencePoints	UMETA(DisplayName = "Experience Points"),
 	ThrowPower			UMETA(DisplayName = "Throw Power"),
-	Rank				UMETA(DisplayName = "Rank"),
+	Rank				UMETA(DisplayName = "Rank", Hidden),
 	TurnOrder			UMETA(DisplayName = "Turn Order"),		// Hidden Enum Element, so this cannot be modified by the Apply Mod Function in Blueprints
 	All_Attributes		UMETA(DisplayName = "All Attributes")
 };
@@ -54,6 +54,11 @@ enum class EModifierType : uint8 {
 	Poison			UMETA(DisplayName = "Poison")
 };
 
+UENUM()
+enum class EAbility : uint8 {
+	Basic_Attack	UMETA(DisplayName = "Basic Attack")
+};
+
 
 UENUM(BlueprintType)
 enum class EElementalType : uint8 {
@@ -79,4 +84,13 @@ UENUM(BlueprintType)
 enum class ETeamNumber : uint8 {
 	TeamOne		UMETA(DisplayName = "Team 1"),
 	TeamTwo		UMETA(DisplayName = "Team 2")
+};
+
+
+UENUM(BlueprintType)
+enum class EMovementDirection : uint8 {
+	Left	UMETA(DisplayName = "Left"),
+	Right	UMETA(DisplayName = "Right"),
+	Up		UMETA(DisplayName = "Up"),
+	Down	UMETA(DisplayName = "Down")
 };

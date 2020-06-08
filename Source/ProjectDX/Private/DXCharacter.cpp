@@ -2,6 +2,7 @@
 
 
 #include "DXCharacter.h"
+#include "Grid.h"
 
 // Sets default values
 ADXCharacter::ADXCharacter() :
@@ -11,7 +12,7 @@ ADXCharacter::ADXCharacter() :
 	character_stats(nullptr),
 	position_on_grid(FVector(0.0f)),
 	modifier_manager(nullptr),
-	current_tile(nullptr)
+	current_grid(nullptr)
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -59,6 +60,7 @@ void ADXCharacter::Init_CharacterStats() {
 
 // Called at the begining of each turn by Turn Game Mode, when its this players turn
 void ADXCharacter::Begin_Turn_Implementation() {
+	UE_LOG(LogTemp, Warning, TEXT("Begin Turn Recieved from Game Mode"));
 	modifier_manager->Update();
 }
 

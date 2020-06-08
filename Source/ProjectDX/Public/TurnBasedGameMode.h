@@ -22,6 +22,8 @@ public:
 	ATurnBasedGameMode();
 	~ATurnBasedGameMode();
 
+	virtual void InitGameState() override;
+
 	UFUNCTION(BlueprintCallable, Category = "Turn Based")
 		TArray<ADXCharacter*> Get_OrderedList() const { return combined_ordered_list; }
 

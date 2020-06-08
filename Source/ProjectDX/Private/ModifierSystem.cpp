@@ -86,7 +86,6 @@ void Modifier::Remove() {
 	isActivated = false; 
 	if (origin) origin = nullptr;
 	if (modified_data) modified_data = nullptr;
-	this->~Modifier();
 }
 
 void Modifier::Update() {

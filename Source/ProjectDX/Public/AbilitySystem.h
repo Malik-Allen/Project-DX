@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Math/Matrix.h"
+#include "GameplayDefinitions.h"
 
 /**
  * 
@@ -21,19 +21,23 @@ private:
 
 	class ADXCharacter* owner;	
 
+	void AssignAbilitiyType();
+
 public:
 
 	// Constructor with all the neccessaary variables
 	Ability();
 	~Ability();
 
-	int id;
+	EAbility ability_type;
 
 	FString name;
 	FString description;
 	
-	int ability_range[MAXMIUM_ATTACK_RANGE][MAXMIUM_ATTACK_RANGE];
-
+	int area_of_effect[MAXMIUM_ATTACK_RANGE * MAXMIUM_ATTACK_RANGE];
+	int range;
+	
+	
 	TArray<class Modifier*> ability_modifiers;
 
 	TArray<ADXCharacter*> targets;

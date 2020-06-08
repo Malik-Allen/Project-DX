@@ -1,0 +1,25 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.GridEditor.cpp.obj": [
+			"GridSensingComponentVisualizer.cpp.obj",
+			"GridEditor.cpp.obj",
+			"GridEditorCommands.cpp.obj",
+			"GridEditorMode.cpp.obj",
+			"GridEditorrModeToolkit.cpp.obj",
+			"GridInfo_Editor.cpp.obj",
+			"GridPainter_Editor.cpp.obj",
+			"HexagonGridSettings.cpp.obj",
+			"SquareGridSettings.cpp.obj",
+			"SGridEditor.cpp.obj",
+			"SquareSettingsDetails.cpp.obj"
+		],
+		"Module.GridEditor.gen.cpp.obj": [
+			"GridEditor.init.gen.cpp.obj",
+			"GridInfo_Editor.gen.cpp.obj",
+			"GridPainter_Editor.gen.cpp.obj",
+			"HexagonGridSettings.gen.cpp.obj",
+			"SquareGridSettings.gen.cpp.obj"
+		]
+	}
+}

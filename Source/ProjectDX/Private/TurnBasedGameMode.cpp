@@ -3,6 +3,7 @@
 
 #include "TurnBasedGameMode.h"
 #include "TurnInterface.h"
+#include "Kismet/GameplayStatics.h"
 
 ATurnBasedGameMode::ATurnBasedGameMode() :
 	Active_Character(nullptr),
@@ -10,13 +11,18 @@ ATurnBasedGameMode::ATurnBasedGameMode() :
 	FirstTeam(ETeamNumber::TeamOne),
 	WinningTeamNumber(ETeamNumber::TeamOne)
 {
+	
+}
+
+ATurnBasedGameMode::~ATurnBasedGameMode() {}
+
+void ATurnBasedGameMode::InitGameState() {
 	priority_queue = NewObject<UPriorityQueue>();
 	team_one.Reserve(MAX_TEAM_SIZE);
 	team_two.Reserve(MAX_TEAM_SIZE);
 	combined_ordered_list.Reserve(MAX_TEAM_SIZE + MAX_TEAM_SIZE);
+	Super::InitGameState();
 }
-
-ATurnBasedGameMode::~ATurnBasedGameMode() {}
 
 // Used to add a character to the desired team
 void ATurnBasedGameMode::AddCharacterToTeam(ETeamNumber teamNumber, ADXCharacter* character) {
@@ -57,6 +63,7 @@ void ATurnBasedGameMode::OrderList(TArray<ADXCharacter*> list) {
 		else {
 			if (GEngine)
 				GEngine->AddOnScreenDebugMessage(-1, 100.0f, FColor::Red, "Bad Cast, could not find a character");
+			UE_LOG(LogTemp, Warning, TEXT("Bad Cast, could not find a character"));
 		}
 		priority_queue->Pop();
 	}
@@ -101,11 +108,16 @@ void ATurnBasedGameMode::OrderCombinedList() {
 void ATurnBasedGameMode::Next_Turn() {
 	if (combined_ordered_list.Num() == 0) return;
 	
-	if (combined_ordered_list.IsValidIndex(0)) {
+	if (combined_ordered_list.Num() > 0) {
 		ADXCharacter* temp = combined_ordered_list[0];
 		Active_Character = temp;
-		combined_ordered_list.RemoveAt(0);
-		combined_ordered_list.Add(temp);
+
+		for (int i = 1; i < combined_ordered_list.Num(); i++)
+			combined_ordered_list[i - 1] = combined_ordered_list[i];
+		
+		int lastIndex = combined_ordered_list.Num() - 1;
+		if (combined_ordered_list.IsValidIndex(lastIndex))
+			combined_ordered_list[lastIndex] = temp;
 	}
 	
 	for (int i = 0; i < combined_ordered_list.Num(); i++) {
@@ -114,13 +126,20 @@ void ATurnBasedGameMode::Next_Turn() {
 
 	OrderList(combined_ordered_list);
 
+	UE_LOG(LogTemp, Warning, TEXT("Next Turn Has reach interface call"));
 	ITurnInterface* turn_interface = Cast<ITurnInterface>(Active_Character);			// Now that this list has been order, we can call begin turn
-	if (turn_interface)
+	if (turn_interface) {
+		UE_LOG(LogTemp, Warning, TEXT("Interface is valid"));
 		turn_interface->Execute_Begin_Turn(Active_Character);
+	}
 }
 
 // Returns true if all requirements for the game mode have been met, false if not
 bool ATurnBasedGameMode::OnBeginGame_Implementation() {
+	// Next_Turn();
+	// APlayerController* controller = UGameplayStatics::GetPlayerController(this, 0);
+	// if (controller)
+	// 	controller->Possess(Active_Character);
 	// Call Next Turn to set up the first player in the ordered list
 	// Posses that player with the player controller
 	// Add a call to apply all passive modifiers/ abilities(once that has been set up)

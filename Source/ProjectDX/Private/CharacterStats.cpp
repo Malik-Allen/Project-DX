@@ -7,7 +7,7 @@
 
 UAttribute::UAttribute() : 
 	type(EAttributeType::HealthPoints),
-	base_value(100.0f), new_value(0.0f), old_value(0.0f), difference(0.0f),
+	base_value(0.0f), new_value(0.0f), old_value(0.0f), difference(0.0f),
 	value_type(EValueType::FixedValue), computative_type(EComputativeType::Additive),
 	name("HP")
 {}
@@ -133,13 +133,13 @@ void UCharacterStats::Init_Attributes() {
 	if (ActionPoints) {
 		ActionPoints->Set_AttributeType(EAttributeType::ActionPoints);
 		ActionPoints->Set_Name("AP");
-		All_Attributes.Add(ActionPoints);
+		// All_Attributes.Add(ActionPoints);
 	}
 
 	if (Mobility) {
 		Mobility->Set_AttributeType(EAttributeType::Mobility);
 		Mobility->Set_Name("Movement");
-		All_Attributes.Add(Mobility);
+		// All_Attributes.Add(Mobility);
 	}
 
 	if (Attack) {
@@ -181,7 +181,7 @@ void UCharacterStats::Init_Attributes() {
 	if (Rank) {
 		Rank->Set_AttributeType(EAttributeType::Rank);
 		Rank->Set_Name("Rank");
-		All_Attributes.Add(Rank);
+		// All_Attributes.Add(Rank);
 	}
 		
 	if (TurnOrder) {

@@ -1,0 +1,8 @@
+{
+	"BuildId": "10570792",
+	"Modules": 
+	{
+		"GridEditor": "UE4Editor-GridEditor-0003.dll",
+		"GridRuntime": "UE4Editor-GridRuntime-0003.dll"
+	}
+}

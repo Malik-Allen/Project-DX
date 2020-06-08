@@ -1,0 +1,100 @@
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Intermediate\Build\Win64\UE4Editor\Development\GridEditor\Definitions.GridEditor.h
+C:/_Stories/Disgaea-XCOM/ProjectDX/Plugins/grid-master/Source/GridEditor/Private/ComponentVisualizers/GridSensingComponentVisualizer.cpp
+c:\_stories\disgaea-xcom\projectdx\plugins\grid-master\source\grideditor\private\componentvisualizers\GridSensingComponentVisualizer.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Editor\UnrealEd\Public\ComponentVisualizer.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Source\GridRuntime\Public\Components/GridSensingComponent.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Intermediate\Build\Win64\UE4Editor\Inc\GridRuntime\GridSensingComponent.generated.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Source\GridEditor\Private\GridEditorMode.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Editor\UnrealEd\Public\EdMode.h
+c:\program files\epic games\ue_4.24\engine\source\editor\unrealed\public\EditorModeRegistry.h
+c:\program files\epic games\ue_4.24\engine\source\editor\unrealed\public\Tools/UEdMode.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Runtime\Experimental\InteractiveToolsFramework\Public\InputState.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Intermediate\Build\Win64\UE4Editor\Inc\InteractiveToolsFramework\InputState.generated.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UnrealEd\UEdMode.generated.h
+c:\_stories\disgaea-xcom\projectdx\plugins\grid-master\source\grideditor\private\Settings/SquareGridSettings.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Intermediate\Build\Win64\UE4Editor\Inc\GridEditor\SquareGridSettings.generated.h
+c:\_stories\disgaea-xcom\projectdx\plugins\grid-master\source\grideditor\private\Settings/HexagonGridSettings.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Intermediate\Build\Win64\UE4Editor\Inc\GridEditor\HexagonGridSettings.generated.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Source\GridRuntime\Public\GridManager.h
+c:\_stories\disgaea-xcom\projectdx\plugins\grid-master\source\gridruntime\public\GridPathfindingParams.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Runtime\GameplayTags\Classes\GameplayTagContainer.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Intermediate\Build\Win64\UE4Editor\Inc\GameplayTags\GameplayTagContainer.generated.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Intermediate\Build\Win64\UE4Editor\Inc\GridRuntime\GridPathfindingParams.generated.h
+c:\_stories\disgaea-xcom\projectdx\plugins\grid-master\source\gridruntime\public\GridPainter/GridPainter.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Runtime\CoreUObject\Public\UObject/NoExportTypes.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Runtime\Core\Public\Math/UnitConversion.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Runtime\Core\Public\Math/UnitConversion.inl
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Runtime\Core\Public\Internationalization/PolyglotTextData.h
+c:\_stories\disgaea-xcom\projectdx\plugins\grid-master\source\gridruntime\public\Grid.h
+c:\_stories\disgaea-xcom\projectdx\plugins\grid-master\source\gridruntime\public\GridInfo.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Intermediate\Build\Win64\UE4Editor\Inc\GridRuntime\GridInfo.generated.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Intermediate\Build\Win64\UE4Editor\Inc\GridRuntime\Grid.generated.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Intermediate\Build\Win64\UE4Editor\Inc\GridRuntime\GridPainter.generated.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Intermediate\Build\Win64\UE4Editor\Inc\GridRuntime\GridManager.generated.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Source\GridEditor\Private\GridInfo_Editor.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Intermediate\Build\Win64\UE4Editor\Inc\GridEditor\GridInfo_Editor.generated.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Editor\UnrealEd\Public\EditorModeManager.h
+C:/_Stories/Disgaea-XCOM/ProjectDX/Plugins/grid-master/Source/GridEditor/Private/GridEditor.cpp
+c:\_stories\disgaea-xcom\projectdx\plugins\grid-master\source\grideditor\private\GridEditorCommands.h
+c:\_stories\disgaea-xcom\projectdx\plugins\grid-master\source\grideditor\private\GridEditorPCH.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Source\GridEditor\Public\IGridEditor.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Source\GridRuntime\Public\Hexagon/HexagonGrid.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Intermediate\Build\Win64\UE4Editor\Inc\GridRuntime\HexagonGrid.generated.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Source\GridRuntime\Public\Hexagon/HexagonGridManager.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Source\GridRuntime\Public\Hexagon/HexagonPathFinder.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Intermediate\Build\Win64\UE4Editor\Inc\GridRuntime\HexagonPathFinder.generated.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Intermediate\Build\Win64\UE4Editor\Inc\GridRuntime\HexagonGridManager.generated.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Source\GridRuntime\Public\Square/SquareGrid.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Intermediate\Build\Win64\UE4Editor\Inc\GridRuntime\SquareGrid.generated.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Source\GridRuntime\Public\Square/SquareGridManager.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Intermediate\Build\Win64\UE4Editor\Inc\GridRuntime\SquareGridManager.generated.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Source\GridRuntime\Public\Square/SquarePathFinder.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Intermediate\Build\Win64\UE4Editor\Inc\GridRuntime\SquarePathFinder.generated.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Editor\UnrealEd\Classes\Editor/UnrealEdEngine.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Editor\UnrealEd\Public\IPackageAutoSaver.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Developer\SourceControl\Public\ISourceControlProvider.h
+c:\program files\epic games\ue_4.24\engine\source\developer\sourcecontrol\public\ISourceControlOperation.h
+c:\program files\epic games\ue_4.24\engine\source\developer\sourcecontrol\public\ISourceControlState.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Editor\UnrealEd\Public\IDDCNotifications.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Editor\UnrealEd\Public\ComponentVisualizerManager.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UnrealEd\UnrealEdEngine.generated.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Editor\UnrealEd\Public\UnrealEdGlobals.h
+c:\_stories\disgaea-xcom\projectdx\plugins\grid-master\source\grideditor\private\SquareSettingsDetails.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Editor\PropertyEditor\Public\IDetailCustomization.h
+C:/_Stories/Disgaea-XCOM/ProjectDX/Plugins/grid-master/Source/GridEditor/Private/GridEditorCommands.cpp
+C:/_Stories/Disgaea-XCOM/ProjectDX/Plugins/grid-master/Source/GridEditor/Private/GridEditorMode.cpp
+c:\_stories\disgaea-xcom\projectdx\plugins\grid-master\source\grideditor\private\GridEditorPCH.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Editor\UnrealEd\Public\Toolkits/ToolkitManager.h
+c:\_stories\disgaea-xcom\projectdx\plugins\grid-master\source\grideditor\private\GridEditorModeToolkit.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Runtime\Core\Public\Misc/FileHelper.h
+c:\_stories\disgaea-xcom\projectdx\plugins\grid-master\source\grideditor\private\GridPainter_Editor.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Source\GridRuntime\Public\GridPainter/GridDecalPainter.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Intermediate\Build\Win64\UE4Editor\Inc\GridRuntime\GridDecalPainter.generated.h
+C:\_Stories\Disgaea-XCOM\ProjectDX\Plugins\grid-master\Intermediate\Build\Win64\UE4Editor\Inc\GridEditor\GridPainter_Editor.generated.h
+C:/_Stories/Disgaea-XCOM/ProjectDX/Plugins/grid-master/Source/GridEditor/Private/GridEditorrModeToolkit.cpp
+c:\_stories\disgaea-xcom\projectdx\plugins\grid-master\source\grideditor\private\SGridEditor.h
+C:/_Stories/Disgaea-XCOM/ProjectDX/Plugins/grid-master/Source/GridEditor/Private/GridInfo_Editor.cpp
+C:/_Stories/Disgaea-XCOM/ProjectDX/Plugins/grid-master/Source/GridEditor/Private/GridPainter_Editor.cpp
+C:/_Stories/Disgaea-XCOM/ProjectDX/Plugins/grid-master/Source/GridEditor/Private/Settings/HexagonGridSettings.cpp
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Runtime\Engine\Classes\Materials/MaterialInstance.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Runtime\Engine\Classes\Materials/MaterialInstanceBasePropertyOverrides.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\MaterialInstanceBasePropertyOverrides.generated.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\MaterialInstance.generated.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Runtime\CoreUObject\Public\UObject/ConstructorHelpers.h
+C:/_Stories/Disgaea-XCOM/ProjectDX/Plugins/grid-master/Source/GridEditor/Private/Settings/SquareGridSettings.cpp
+C:/_Stories/Disgaea-XCOM/ProjectDX/Plugins/grid-master/Source/GridEditor/Private/SGridEditor.cpp
+c:\_stories\disgaea-xcom\projectdx\plugins\grid-master\source\grideditor\private\GridEditorPCH.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Runtime\Slate\Public\SlateOptMacros.h
+C:/_Stories/Disgaea-XCOM/ProjectDX/Plugins/grid-master/Source/GridEditor/Private/SquareSettingsDetails.cpp
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Editor\PropertyEditor\Public\DetailCategoryBuilder.h
+c:\program files\epic games\ue_4.24\engine\source\editor\propertyeditor\public\IDetailCustomNodeBuilder.h
+c:\program files\epic games\ue_4.24\engine\source\editor\propertyeditor\public\DetailBuilderTypes.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Editor\PropertyEditor\Public\DetailLayoutBuilder.h
+c:\program files\epic games\ue_4.24\engine\source\editor\propertyeditor\public\IDetailPropertyRow.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Editor\PropertyEditor\Public\PropertyCustomizationHelpers.h
+c:\program files\epic games\ue_4.24\engine\source\editor\propertyeditor\public\DetailWidgetRow.h
+c:\program files\epic games\ue_4.24\engine\source\editor\propertyeditor\public\SResetToDefaultMenu.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Editor\ActorPickerMode\Public\ActorPickerMode.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Editor\SceneDepthPickerMode\Public\SceneDepthPickerMode.h
+C:\Program Files\Epic Games\UE_4.24\Engine\Source\Developer\DesktopPlatform\Public\DesktopPlatformModule.h
+c:\program files\epic games\ue_4.24\engine\source\developer\desktopplatform\public\IDesktopPlatform.h
