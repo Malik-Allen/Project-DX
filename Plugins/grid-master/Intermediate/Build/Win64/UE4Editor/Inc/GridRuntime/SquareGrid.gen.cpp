@@ -129,7 +129,7 @@ void EmptyLinkFunctionForGeneratedCodeSquareGrid() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(USquareGrid, 2548752335);
+	IMPLEMENT_CLASS(USquareGrid, 2041802940);
 	template<> GRIDRUNTIME_API UClass* StaticClass<USquareGrid>()
 	{
 		return USquareGrid::StaticClass();

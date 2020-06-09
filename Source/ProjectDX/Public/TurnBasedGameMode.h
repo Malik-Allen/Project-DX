@@ -8,6 +8,9 @@
 #include "DXCharacter.h"
 #include "TurnBasedGameMode.generated.h"
 
+class CommandManager;
+
+
 /**
  * 
  */
@@ -52,6 +55,15 @@ public:
 
 	// Returns true if all requirements for the game mode have been met, false if not
 	virtual bool OnBeginGame_Implementation();
+
+	UFUNCTION(BlueprintCallable, Category = "Turn Based")
+		void Spawn_Character(class UGrid* Grid, TSubclassOf<ADXCharacter> CharcaterClass);
+
+	UFUNCTION(BlueprintCallable, Category = "Turn Based")
+		void Undo();
+
+	UFUNCTION(BlueprintCallable, Category = "Turn Based")
+		void Redo();
 	
 private:
 
@@ -67,6 +79,10 @@ private:
 	ETeamNumber FirstTeam;
 	ETeamNumber WinningTeamNumber;
 
+	CommandManager* Command_Manager;
+
 	void OrderList(TArray<ADXCharacter*> list);
+
+	TArray<ADXCharacter*> all_characters;
 
 };

@@ -35,20 +35,26 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Character")
-		FString name;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Character")
-		int turn_order;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Character")
-		int team_number;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Character")
-		UCharacterStats* character_stats;
-	// Abilities Vector
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Character")
-		FVector position_on_grid;
+	FString name;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Character")
+	int turn_order;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Character")
+	int team_number;
+
+	UPROPERTY(Category = "Character Attributes", VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true", DisplayName = "Character Attributes"))
+	UCharacterAttributes* character_attributes;
+	
 	ModifierManager* modifier_manager;
-	void Init_CharacterStats();
-	void Init_ModifierManager();
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Character")
+	class UGrid* current_grid;
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, meta = (BlueprintProtected), Category = "Character Attributes")
+		void AssignAttributes();
+	virtual void AssignAttributes_Implementation() {}
+
 
 	// Called at the begining of each turn by Turn Game Mode, when its this players turn
 	virtual void Begin_Turn_Implementation() override;
@@ -56,6 +62,6 @@ public:
 	// Called at the end of each turn by Turn Game Mode, when its this player ends their turn
 	virtual void End_Turn_Implementation() override;
 
-	class UGrid* current_grid;
+	
 
 };

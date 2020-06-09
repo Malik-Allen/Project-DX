@@ -8,9 +8,9 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+struct FVector;
 class UGrid;
 struct FIntVector;
-struct FVector;
 #ifdef GRIDRUNTIME_Grid_generated_h
 #error "Grid.generated.h already included, missing '#pragma once' in Grid.h"
 #endif
@@ -19,6 +19,14 @@ struct FVector;
 #define ProjectDX_Plugins_grid_master_Source_GridRuntime_Public_Grid_h_25_SPARSE_DATA
 #define ProjectDX_Plugins_grid_master_Source_GridRuntime_Public_Grid_h_25_RPC_WRAPPERS \
 	virtual void GetNeighbors_Implementation(TArray<UGrid*>& Grids); \
+ \
+	DECLARE_FUNCTION(execGetCenterSpawnableLocation) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(FVector*)Z_Param__Result=P_THIS->GetCenterSpawnableLocation(); \
+		P_NATIVE_END; \
+	} \
  \
 	DECLARE_FUNCTION(execGetNeighbors) \
 	{ \
@@ -107,6 +115,14 @@ struct FVector;
 
 
 #define ProjectDX_Plugins_grid_master_Source_GridRuntime_Public_Grid_h_25_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execGetCenterSpawnableLocation) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(FVector*)Z_Param__Result=P_THIS->GetCenterSpawnableLocation(); \
+		P_NATIVE_END; \
+	} \
  \
 	DECLARE_FUNCTION(execGetNeighbors) \
 	{ \

@@ -72,7 +72,7 @@ void EmptyLinkFunctionForGeneratedCodeHexagonGrid() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UHexagonGrid, 948220711);
+	IMPLEMENT_CLASS(UHexagonGrid, 3013686787);
 	template<> GRIDRUNTIME_API UClass* StaticClass<UHexagonGrid>()
 	{
 		return UHexagonGrid::StaticClass();

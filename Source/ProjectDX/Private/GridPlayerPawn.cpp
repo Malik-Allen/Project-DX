@@ -22,6 +22,8 @@ AGridPlayerPawn::AGridPlayerPawn() :
 	// Init Physics/ Collision Capsule
 	capsule_component = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleComp"));
 	RootComponent = capsule_component;
+	capsule_component->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	
 
 	springArm_component = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
 	springArm_component->SetupAttachment(RootComponent);
@@ -150,16 +152,10 @@ void AGridPlayerPawn::UpdatePosititon(float deltaTime) {
 		return;
 	}
 
-	if (current_grid == nullptr) {
-		bIsMoving = false;
-		return;
-	}
-
-	FVector current_grid_location = current_grid->GetCenter();
 	FVector target_grid_location = target_grid->GetCenter();
 	FVector capsule_location = capsule_component->GetRelativeLocation();
 
-	FVector direction_normal = target_grid_location - current_grid_location;
+	FVector direction_normal = target_grid_location - capsule_location;
 	direction_normal = FVector(direction_normal.X, direction_normal.Y, 0.0f);
 	direction_normal.Normalize();
 
@@ -190,6 +186,4 @@ void AGridPlayerPawn::UpdatePosititon(float deltaTime) {
 
 void AGridPlayerPawn::AssignCurrentGrid(UGrid* grid) {
 	current_grid = grid;
-	if (current_grid)
-		MoveToGrid(current_grid);
 }

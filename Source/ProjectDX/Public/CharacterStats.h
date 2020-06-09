@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameplayDefinitions.h"
-#include "UObject/Object.h"
+#include "Components/ActorComponent.h"
 #include "CharacterStats.generated.h"
 
 
@@ -17,6 +17,8 @@ UCLASS()
 class PROJECTDX_API UAttribute : public UObject
 {
 	GENERATED_BODY()
+
+	friend class UCharacterAttributes;
 
 public:
 
@@ -75,44 +77,51 @@ private:
 	EValueType value_type;
 	EComputativeType computative_type;
 	FString name;
+
 };
 
 UCLASS(BlueprintType)
-class PROJECTDX_API UCharacterStats : public UObject {
+class PROJECTDX_API UCharacterAttributes : public UActorComponent {
 	GENERATED_BODY()
 
 public:
-	UCharacterStats();
-	~UCharacterStats();
+	UCharacterAttributes();
+	~UCharacterAttributes();
 
 	/*When adding a new stat, you must add the desired stat to enum-->GameplayDefinitions::EAttributeType, and define that stat type in Init() of this class*/
 
-	UPROPERTY(BlueprintReadWrite, Category = "Character Stats")
+	UPROPERTY(BlueprintReadWrite, Category = "Character Attributes")
 		UAttribute* HealthPoints;
-	UPROPERTY(BlueprintReadWrite, Category = "Character Stats")
+	UPROPERTY(BlueprintReadWrite, Category = "Character Attributes")
 		UAttribute* ActionPoints;
-	UPROPERTY(BlueprintReadWrite, Category = "Character Stats")
+	UPROPERTY(BlueprintReadWrite, Category = "Character Attributes")
 		UAttribute* Mobility;
-	UPROPERTY(BlueprintReadWrite, Category = "Character Stats")
+	UPROPERTY(BlueprintReadWrite, Category = "Character Attributes")
 		UAttribute* Attack;
-	UPROPERTY(BlueprintReadWrite, Category = "Character Stats")
+	UPROPERTY(BlueprintReadWrite, Category = "Character Attributes")
 		UAttribute* Defense;
-	UPROPERTY(BlueprintReadWrite, Category = "Character Stats")
+	UPROPERTY(BlueprintReadWrite, Category = "Character Attributes")
 		UAttribute* Armor;
-	UPROPERTY(BlueprintReadWrite, Category = "Character Stats")
+	UPROPERTY(BlueprintReadWrite, Category = "Character Attributes")
 		UAttribute* CriticalChance;
-	UPROPERTY(BlueprintReadWrite, Category = "Character Stats")
-		UAttribute* ExperiencePoints;
-	UPROPERTY(BlueprintReadWrite, Category = "Character Stats")
+	UPROPERTY(BlueprintReadWrite, Category = "Character Attributes")
 		UAttribute* ThrowPower;
-	UPROPERTY(BlueprintReadWrite, Category = "Character Stats")
-		UAttribute* Rank;
-	UPROPERTY(BlueprintReadWrite, Category = "Character Stats")
-		UAttribute* TurnOrder;
+
+	
+	TArray<UAttribute*> GetAllAttributes() { return All_Attributes; }
+
+	virtual void OnRegister() override;
+
+	virtual void BeginPlay() override;
+
+	
+	
+
+private:
 
 	TArray<UAttribute*> All_Attributes;
 	
-	void Init_Attributes();
+	
 
 };
 

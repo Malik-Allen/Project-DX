@@ -16,6 +16,35 @@ UAttribute::~UAttribute() {}
 
 void UAttribute::Set_AttributeType(EAttributeType new_type) {
 	type = new_type;
+	switch (type) {
+	case EAttributeType::HealthPoints:
+		name = "Health Points";
+		break;
+	case EAttributeType::ActionPoints:
+		name = "Action Points";
+		break;
+	case EAttributeType::Mobility:
+		name = "Mobility";
+		break;
+	case EAttributeType::Attack:
+		name = "Attack";
+		break;
+	case EAttributeType::Defense:
+		name = "Defense";
+		break;
+	case EAttributeType::Armor:
+		name = "Armor";
+		break;
+	case EAttributeType::CriticalChance:
+		name = "Critical Chance";
+		break;
+	case EAttributeType::ThrowPower:
+		name = "Throw Power";
+		break;
+	default:
+		name = "Error!";
+		break;
+	}
 }
 
 void UAttribute::Set_BaseValue(float new_base_value) {
@@ -99,95 +128,55 @@ void UAttribute::Apply_StatChange(EComputativeType new_computative_type, EValueT
 	base_value = new_value;
 }
 
-UCharacterStats::UCharacterStats() :
-	HealthPoints(nullptr), ActionPoints(nullptr), Mobility(nullptr),
-	Attack(nullptr), Defense(nullptr), Armor(nullptr),
-	CriticalChance(nullptr), ExperiencePoints(nullptr), ThrowPower(nullptr),
-	Rank(nullptr), TurnOrder(nullptr)
+UCharacterAttributes::UCharacterAttributes() :
+HealthPoints(nullptr),
+ActionPoints(nullptr),
+Mobility(nullptr),
+Attack(nullptr),
+Defense(nullptr),
+Armor(nullptr),
+CriticalChance(nullptr),
+ThrowPower(nullptr)
 {}
 
-UCharacterStats::~UCharacterStats() {}
+UCharacterAttributes::~UCharacterAttributes() {}
 
-void UCharacterStats::Init_Attributes() {
+void UCharacterAttributes::OnRegister() {
+	HealthPoints = NewObject<UAttribute>(this, TEXT("Health Points"));
+	HealthPoints->Set_AttributeType(EAttributeType::HealthPoints);
+	All_Attributes.Add(HealthPoints);
 
-	/*!!!---INITIALIZE ALL NEW STATS HERE---!!!*/
+	ActionPoints = NewObject<UAttribute>(this, TEXT("Action Points"));
+	ActionPoints->Set_AttributeType(EAttributeType::ActionPoints);
+	All_Attributes.Add(ActionPoints);
 
-	HealthPoints = NewObject<UAttribute>();
-	ActionPoints = NewObject<UAttribute>();
-	Mobility = NewObject<UAttribute>();
-	Attack = NewObject<UAttribute>();
-	Defense = NewObject<UAttribute>();
-	Armor = NewObject<UAttribute>();
-	CriticalChance = NewObject<UAttribute>();
-	ExperiencePoints = NewObject<UAttribute>();
-	ThrowPower = NewObject<UAttribute>();
-	Rank = NewObject<UAttribute>();
-	TurnOrder = NewObject<UAttribute>();
+	Mobility = NewObject<UAttribute>(this, TEXT("Mobility"));
+	Mobility->Set_AttributeType(EAttributeType::Mobility);
+	All_Attributes.Add(Mobility);
 
-	if (HealthPoints) {
-		HealthPoints->Set_AttributeType(EAttributeType::HealthPoints);
-		HealthPoints->Set_Name("HP");
-		All_Attributes.Add(HealthPoints);
-	}
-		
-	if (ActionPoints) {
-		ActionPoints->Set_AttributeType(EAttributeType::ActionPoints);
-		ActionPoints->Set_Name("AP");
-		// All_Attributes.Add(ActionPoints);
-	}
+	Attack = NewObject<UAttribute>(this, TEXT("Attack"));
+	Attack->Set_AttributeType(EAttributeType::Attack);
+	All_Attributes.Add(Attack);
 
-	if (Mobility) {
-		Mobility->Set_AttributeType(EAttributeType::Mobility);
-		Mobility->Set_Name("Movement");
-		// All_Attributes.Add(Mobility);
-	}
+	Defense = NewObject<UAttribute>(this, TEXT("Defense"));
+	Defense->Set_AttributeType(EAttributeType::Defense);
+	All_Attributes.Add(Defense);
 
-	if (Attack) {
-		Attack->Set_AttributeType(EAttributeType::Attack);
-		Attack->Set_Name("Attack");
-		All_Attributes.Add(Attack);
-	}
-		
-	if (Defense) {
-		Defense->Set_AttributeType(EAttributeType::Defense);
-		Defense->Set_Name("Defense");
-		All_Attributes.Add(Defense);
-	}
+	Armor = NewObject<UAttribute>(this, TEXT("Armor"));
+	Armor->Set_AttributeType(EAttributeType::Armor);
+	All_Attributes.Add(Armor);
 
-	if (Armor) {
-		Armor->Set_AttributeType(EAttributeType::Armor);
-		Armor->Set_Name("Armor");
-		All_Attributes.Add(Armor);
-	}
+	CriticalChance = NewObject<UAttribute>(this, TEXT("Critical Chance"));
+	CriticalChance->Set_AttributeType(EAttributeType::CriticalChance);
+	All_Attributes.Add(CriticalChance);
 
-	if (CriticalChance) {
-		CriticalChance->Set_AttributeType(EAttributeType::CriticalChance);
-		CriticalChance->Set_Name("Crit");
-		All_Attributes.Add(CriticalChance);
-	}
+	ThrowPower = NewObject<UAttribute>(this, TEXT("Throw Power"));
+	ThrowPower->Set_AttributeType(EAttributeType::ThrowPower);
+	All_Attributes.Add(ThrowPower);
 
-	if (ExperiencePoints) {
-		ExperiencePoints->Set_AttributeType(EAttributeType::ExperiencePoints);
-		ExperiencePoints->Set_Name("XP");
-		All_Attributes.Add(ExperiencePoints);
-	}
-		
-	if (ThrowPower) {
-		ThrowPower->Set_AttributeType(EAttributeType::ThrowPower);
-		ThrowPower->Set_Name("Throw");
-		All_Attributes.Add(ThrowPower);
-	}
-		
-	if (Rank) {
-		Rank->Set_AttributeType(EAttributeType::Rank);
-		Rank->Set_Name("Rank");
-		// All_Attributes.Add(Rank);
-	}
-		
-	if (TurnOrder) {
-		TurnOrder->Set_AttributeType(EAttributeType::TurnOrder);
-		TurnOrder->Set_Name("Order");
-		 // All_Attributes.Add(TurnOrder);, Turn Order will not be a stat that is traditionally assigned with the group of other
-	}
+	Super::OnRegister();
+}
 
+void UCharacterAttributes::BeginPlay() {
+	Super::BeginPlay();
 }

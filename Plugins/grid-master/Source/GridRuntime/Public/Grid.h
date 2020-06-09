@@ -79,6 +79,9 @@ public:
 
 	FIntVector Coord;
 
+	UFUNCTION(BlueprintCallable, Category = "Grid")
+	FVector GetCenterSpawnableLocation() const;
+
 protected:
 	bool bVisible;
 

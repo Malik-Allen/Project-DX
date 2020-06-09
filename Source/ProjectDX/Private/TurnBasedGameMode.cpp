@@ -4,12 +4,16 @@
 #include "TurnBasedGameMode.h"
 #include "TurnInterface.h"
 #include "Kismet/GameplayStatics.h"
+#include "UndoRedo/CommandManager.h"
+#include "Grid.h"
+#include "CommandSystem.h"
 
 ATurnBasedGameMode::ATurnBasedGameMode() :
 	Active_Character(nullptr),
 	priority_queue(nullptr),
 	FirstTeam(ETeamNumber::TeamOne),
-	WinningTeamNumber(ETeamNumber::TeamOne)
+	WinningTeamNumber(ETeamNumber::TeamOne),
+	Command_Manager(new CommandManager())
 {
 	
 }
@@ -145,4 +149,16 @@ bool ATurnBasedGameMode::OnBeginGame_Implementation() {
 	// Add a call to apply all passive modifiers/ abilities(once that has been set up)
 
 	return true;
+}
+
+void ATurnBasedGameMode::Spawn_Character( UGrid* Grid, TSubclassOf<ADXCharacter> CharcaterClass) {
+	Command_Manager->Exec_Command(new Cmd_SpawnActorAtGrid(UGameplayStatics::GetPlayerController(this, 0), Grid, CharcaterClass, all_characters));
+}
+
+void ATurnBasedGameMode::Undo() {
+	Command_Manager->Undo_Command();
+}
+
+void ATurnBasedGameMode::Redo() {
+	Command_Manager->Redo_Command();
 }

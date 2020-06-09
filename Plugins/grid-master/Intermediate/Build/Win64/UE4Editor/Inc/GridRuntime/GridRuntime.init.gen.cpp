@@ -31,8 +31,8 @@ void EmptyLinkFunctionForGeneratedCodeGridRuntime_init() {}
 				SingletonFuncArray,
 				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0x01053841,
-				0xB414921C,
+				0xE1187D28,
+				0xE74C55FA,
 				METADATA_PARAMS(nullptr, 0)
 			};
 			UE4CodeGen_Private::ConstructUPackage(ReturnPackage, PackageParams);

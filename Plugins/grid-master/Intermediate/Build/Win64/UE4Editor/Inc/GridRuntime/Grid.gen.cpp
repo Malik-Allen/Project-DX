@@ -21,6 +21,7 @@ void EmptyLinkFunctionForGeneratedCodeGrid() {}
 	GRIDRUNTIME_API UFunction* Z_Construct_UFunction_UGrid_Equal();
 	GRIDRUNTIME_API UFunction* Z_Construct_UFunction_UGrid_GetCenter();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
+	GRIDRUNTIME_API UFunction* Z_Construct_UFunction_UGrid_GetCenterSpawnableLocation();
 	GRIDRUNTIME_API UFunction* Z_Construct_UFunction_UGrid_GetCoord();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FIntVector();
 	GRIDRUNTIME_API UFunction* Z_Construct_UFunction_UGrid_GetDistance();
@@ -103,6 +104,7 @@ void EmptyLinkFunctionForGeneratedCodeGrid() {}
 		static const FNameNativePtrPair Funcs[] = {
 			{ "Equal", &UGrid::execEqual },
 			{ "GetCenter", &UGrid::execGetCenter },
+			{ "GetCenterSpawnableLocation", &UGrid::execGetCenterSpawnableLocation },
 			{ "GetCoord", &UGrid::execGetCoord },
 			{ "GetDistance", &UGrid::execGetDistance },
 			{ "GetGridSize", &UGrid::execGetGridSize },
@@ -194,6 +196,39 @@ void EmptyLinkFunctionForGeneratedCodeGrid() {}
 		if (!ReturnFunction)
 		{
 			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_UGrid_GetCenter_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UGrid_GetCenterSpawnableLocation_Statics
+	{
+		struct Grid_eventGetCenterSpawnableLocation_Parms
+		{
+			FVector ReturnValue;
+		};
+		static const UE4CodeGen_Private::FStructPropertyParams NewProp_ReturnValue;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UGrid_GetCenterSpawnableLocation_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(Grid_eventGetCenterSpawnableLocation_Parms, ReturnValue), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UGrid_GetCenterSpawnableLocation_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UGrid_GetCenterSpawnableLocation_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UGrid_GetCenterSpawnableLocation_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Grid" },
+		{ "ModuleRelativePath", "Public/Grid.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_UGrid_GetCenterSpawnableLocation_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UGrid, nullptr, "GetCenterSpawnableLocation", nullptr, nullptr, sizeof(Grid_eventGetCenterSpawnableLocation_Parms), Z_Construct_UFunction_UGrid_GetCenterSpawnableLocation_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UGrid_GetCenterSpawnableLocation_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54820401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UGrid_GetCenterSpawnableLocation_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UGrid_GetCenterSpawnableLocation_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UGrid_GetCenterSpawnableLocation()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_UGrid_GetCenterSpawnableLocation_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -532,6 +567,7 @@ void EmptyLinkFunctionForGeneratedCodeGrid() {}
 	const FClassFunctionLinkInfo Z_Construct_UClass_UGrid_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_UGrid_Equal, "Equal" }, // 3334877774
 		{ &Z_Construct_UFunction_UGrid_GetCenter, "GetCenter" }, // 666137290
+		{ &Z_Construct_UFunction_UGrid_GetCenterSpawnableLocation, "GetCenterSpawnableLocation" }, // 4266518582
 		{ &Z_Construct_UFunction_UGrid_GetCoord, "GetCoord" }, // 1131311462
 		{ &Z_Construct_UFunction_UGrid_GetDistance, "GetDistance" }, // 1869020365
 		{ &Z_Construct_UFunction_UGrid_GetGridSize, "GetGridSize" }, // 3447194108
@@ -621,7 +657,7 @@ void EmptyLinkFunctionForGeneratedCodeGrid() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UGrid, 158216907);
+	IMPLEMENT_CLASS(UGrid, 3493870082);
 	template<> GRIDRUNTIME_API UClass* StaticClass<UGrid>()
 	{
 		return UGrid::StaticClass();
