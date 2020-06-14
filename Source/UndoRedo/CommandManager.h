@@ -6,8 +6,8 @@
 class ICommand {
 public:
 	virtual ~ICommand() {}
-	virtual void Execute() = 0;
-	virtual void Undo() = 0;
+	virtual bool Execute() = 0;
+	virtual bool Undo() = 0;
 	virtual void Redo() = 0;
 };
 
@@ -19,20 +19,24 @@ class CommandManager {
 public:
 
 	CommandManager() {}
-	~CommandManager() {}
+	~CommandManager() { undo_stack.clear(); redo_stack.clear(); }
 
-	void Exec_Command(ICommand* command) {
+	bool Exec_Command(ICommand* command) {
 		redo_stack.clear();
-		command->Execute();
+		if(!command->Execute())
+			return false;
 		undo_stack.push(command);
+		return true;
 	}
 
-	void Undo_Command() {
+	bool Undo_Command() {
 		if (undo_stack.size() <= 0)
-			return;
-		undo_stack.top()->Undo();
+			return false;
+		if(!undo_stack.top()->Undo())
+			return false;
 		redo_stack.push(undo_stack.top());
 		undo_stack.pop();
+		return true;
 	}
 
 	void Redo_Command() {

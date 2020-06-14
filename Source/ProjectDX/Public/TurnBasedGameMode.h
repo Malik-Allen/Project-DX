@@ -64,6 +64,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Turn Based")
 		void Redo();
+
+	UFUNCTION(BlueprintCallable)
+		void AssignCharacterToGrid(ADXCharacter* Character, UGrid* Grid);
 	
 private:
 

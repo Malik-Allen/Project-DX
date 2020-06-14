@@ -108,6 +108,7 @@ public:
 		UAttribute* ThrowPower;
 
 	
+	UFUNCTION(BlueprintCallable)
 	TArray<UAttribute*> GetAllAttributes() { return All_Attributes; }
 
 	virtual void OnRegister() override;

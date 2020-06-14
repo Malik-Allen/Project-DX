@@ -148,7 +148,7 @@ void UCharacterAttributes::OnRegister() {
 
 	ActionPoints = NewObject<UAttribute>(this, TEXT("Action Points"));
 	ActionPoints->Set_AttributeType(EAttributeType::ActionPoints);
-	All_Attributes.Add(ActionPoints);
+	// All_Attributes.Add(ActionPoints);
 
 	Mobility = NewObject<UAttribute>(this, TEXT("Mobility"));
 	Mobility->Set_AttributeType(EAttributeType::Mobility);

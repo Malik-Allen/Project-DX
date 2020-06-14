@@ -45,16 +45,24 @@ public:
 
 	UPROPERTY(Category = "Character Attributes", VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true", DisplayName = "Character Attributes"))
 	UCharacterAttributes* character_attributes;
+
+	UPROPERTY(Category = "Character Attributes", VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true", DisplayName = "Character Attributes"))
+	class UGridNavigationComponent* GridNavigation;
 	
 	ModifierManager* modifier_manager;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Character")
 	class UGrid* current_grid;
 
+	UGrid* GridOnStartOfTurn;
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, meta = (BlueprintProtected), Category = "Character Attributes")
 		void AssignAttributes();
 	virtual void AssignAttributes_Implementation() {}
 
+
+
+	/*----- Turn Interface Functions -----*/
 
 	// Called at the begining of each turn by Turn Game Mode, when its this players turn
 	virtual void Begin_Turn_Implementation() override;
@@ -62,6 +70,22 @@ public:
 	// Called at the end of each turn by Turn Game Mode, when its this player ends their turn
 	virtual void End_Turn_Implementation() override;
 
+
+
+	/*----- Command Functions -----*/
+
 	
+	void MoveToGrid(UGrid* TargetGrid);
+
+	void UndoMove();
+
+
+private:
+
+	class UCommandSystem* CommandSystem;
+
+	class IInteractionInterface* ControllerInteractionInterface;
+
+	class Cmd_MoveCharacterToGrid* LastMoveCommand;
 
 };

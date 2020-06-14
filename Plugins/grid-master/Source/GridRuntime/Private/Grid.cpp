@@ -28,7 +28,7 @@ FVector UGrid::GetCenter() const
 }
 
 FVector UGrid::GetCenterSpawnableLocation() const {
-	return GetCenter() + FVector(0.0f, 0.0f, 150.0f);
+	return GetCenter() + FVector(0.0f, 0.0f, 125.0f);
 }
 
 void UGrid::SetGridSize(float Size)

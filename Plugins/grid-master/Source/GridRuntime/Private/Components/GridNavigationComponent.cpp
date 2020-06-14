@@ -58,18 +58,21 @@ bool UGridNavigationComponent::RequestMove(UGrid* DestGrid, UGridPathFinder* Pat
 {
 	if (OwnerPawn == nullptr)
 	{
+		UE_LOG(LogTemp, Warning, TEXT("UGridNavigationComponent::RequestMove failed, OwnerPawn is null"));
 		LOG_ERROR(TEXT("UGridNavigationComponent::RequestMove failed, OwnerPawn is null"));
 		return false;
 	}
 
 	if (OwnerController == nullptr)
 	{
+		UE_LOG(LogTemp, Warning, TEXT("UGridNavigationComponent::RequestMove failed, OwnerController is null"));
 		LOG_ERROR(TEXT("UGridNavigationComponent::RequestMove failed, OwnerController is null"));
 		return false;
 	}
 
 	if (DestGrid == nullptr)
 	{
+		UE_LOG(LogTemp, Warning, TEXT("UGridNavigationComponent::RequestMove failed, DestGrid is null"));
 		LOG_WARNING(TEXT("UGridNavigationComponent::RequestMove failed, DestGrid is null"));
 		return false;
 	}
@@ -78,6 +81,7 @@ bool UGridNavigationComponent::RequestMove(UGrid* DestGrid, UGridPathFinder* Pat
 
 	if (!ensure(GridManager != nullptr))
 	{
+		UE_LOG(LogTemp, Warning, TEXT("UGridNavigationComponent::RequestMove failed, GridManager is null"));
 		return false;
 	}
 
@@ -96,6 +100,7 @@ bool UGridNavigationComponent::RequestMove(UGrid* DestGrid, UGridPathFinder* Pat
 
 	if (!UGridUtilities::FindPath(Request, PathFinder, CurrentFollowingPath))
 	{
+		UE_LOG(LogTemp, Warning, TEXT("UGridNavigationComponent::RequestMove failed, Find Path Failed"));
 		return false;
 	}
 

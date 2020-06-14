@@ -12,6 +12,8 @@
 UCLASS(Blueprintable)
 class PROJECTDX_API UBasicGridInfo : public UGridInfo
 {
+	friend class AGridPlayerController;
+
 	GENERATED_BODY()
 
 	// Is this tile occupied
@@ -27,8 +29,6 @@ public:
 	~UBasicGridInfo();
 
 
-
-
 	virtual void Clear_Implementation() override;
 
 	// Is this tile occupied
@@ -39,6 +39,9 @@ public:
 
 	// Will remove occupant reference from this tile, and tile reference of occupant
 	void Evict_Occupant();
+
+	UFUNCTION(BlueprintCallable)
+	ADXCharacter* Get_Occupant() const { return occupant; }
 
 
 

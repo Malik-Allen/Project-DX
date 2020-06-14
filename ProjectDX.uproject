@@ -10,12 +10,15 @@
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
 				"Engine",
-				"GridRuntime"
+				"GridRuntime",
+				"UMG"
 			]
 		}
 	],
 	"TargetPlatforms": [
+		"WindowsNoEditor",
+		"AllDesktop",
 		"MacNoEditor",
-		"WindowsNoEditor"
+		"LinuxNoEditor"
 	]
 }

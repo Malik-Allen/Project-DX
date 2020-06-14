@@ -3,6 +3,11 @@
 
 #include "DXCharacter.h"
 #include "Grid.h"
+#include "Components/GridNavigationComponent.h"
+#include "CommandSystem.h"
+#include "InteractionInterface.h"
+#include "Engine/World.h"
+#include "GridPlayerController.h"
 
 // Sets default values
 ADXCharacter::ADXCharacter() :
@@ -10,14 +15,23 @@ ADXCharacter::ADXCharacter() :
 	turn_order(0),
 	team_number(0),
 	modifier_manager(new ModifierManager()),
-	current_grid(nullptr)
+	current_grid(nullptr),
+	GridOnStartOfTurn(nullptr),
+	ControllerInteractionInterface(nullptr),
+	LastMoveCommand(nullptr)
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	
 	character_attributes = CreateDefaultSubobject<UCharacterAttributes>(TEXT("Character Attributes"));
 	character_attributes->SetAutoActivate(true);
-	// character_attributes->Init();
+
+	GridNavigation = CreateDefaultSubobject<UGridNavigationComponent>(TEXT("Grid Navigation"));
+	GridNavigation->NavMode = EGridNavMode::GridBased;
+	
+	CommandSystem = CreateDefaultSubobject<UCommandSystem>(TEXT("Command System"));
+	CommandSystem->SetAutoActivate(true);
+
 
 }
 
@@ -29,6 +43,7 @@ ADXCharacter::~ADXCharacter() {
 void ADXCharacter::BeginPlay()
 {
 	AssignAttributes();
+	ControllerInteractionInterface = Cast<AGridPlayerController>(GetWorld()->GetFirstPlayerController());
 	Super::BeginPlay();
 }
 
@@ -47,11 +62,78 @@ void ADXCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 // Called at the begining of each turn by Turn Game Mode, when its this players turn
 void ADXCharacter::Begin_Turn_Implementation() {
-	UE_LOG(LogTemp, Warning, TEXT("Begin Turn Recieved from Game Mode"));
+	if (GEngine)
+		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Green, name + "::DXCharacter:: Begin Turn Implementation");
+	UE_LOG(LogTemp, Warning, TEXT("%s::DXCharacter: Begin Turn Implementation"), *name);
 	modifier_manager->Update();
+	GridOnStartOfTurn = current_grid;
 }
 
 // Called at the end of each turn by Turn Game Mode, when its this player ends their turn
 void ADXCharacter::End_Turn_Implementation() {
+	if (GEngine)
+		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::White, name + "::DXCharacter:: End Turn Implementation");
+	UE_LOG(LogTemp, Warning, TEXT("%s::DXCharacter: End Turn Implementation"), *name);
+}
 
+void ADXCharacter::MoveToGrid(UGrid* TargetGrid) {
+	if (LastMoveCommand) {
+		if (GEngine)
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, "DXCharacter: Last Movement Already Exists, Setting New Target");
+		UE_LOG(LogTemp, Warning, TEXT("DXCharacter: Last Movement Already Exists, Setting New Target"));
+		LastMoveCommand->SetTargetGrid(TargetGrid);
+		if (LastMoveCommand->Execute()) {
+			if (GEngine)
+				GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, "DXCharacter: Executed Move, by setting new target");
+			UE_LOG(LogTemp, Warning, TEXT("DXCharacter: Executed Move, by setting new target"));
+			ControllerInteractionInterface->Execute_OnConfirmSuccess(Cast<AGridPlayerController>(GetWorld()->GetFirstPlayerController()));
+			
+		}
+		else {
+			if (GEngine)
+				GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, "DXCharacter: Failed to Execute Move, with new Target");
+			UE_LOG(LogTemp, Warning, TEXT("DXCharacter: Failed to Execute New Move, with new Target"));
+			ControllerInteractionInterface->Execute_OnConfirmFail(Cast<AGridPlayerController>(GetWorld()->GetFirstPlayerController()));
+		}
+	} 
+	else {
+		LastMoveCommand = new Cmd_MoveCharacterToGrid(this, TargetGrid);
+		if (CommandSystem->command_manager->Exec_Command(LastMoveCommand)) {
+			if (GEngine)
+				GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, "DXCharacter: Executed New Move");
+			UE_LOG(LogTemp, Warning, TEXT("DXCharacter: Executed New Move"));
+				ControllerInteractionInterface->Execute_OnConfirmSuccess(Cast<AGridPlayerController>(GetWorld()->GetFirstPlayerController()));
+		}
+		else {
+			if (GEngine)
+				GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, "DXCharacter: Failed to Execute New Move");
+			UE_LOG(LogTemp, Warning, TEXT("DXCharacter: Failed to Execute New Move"));
+			if (ControllerInteractionInterface)
+				ControllerInteractionInterface->Execute_OnConfirmFail(Cast<AGridPlayerController>(GetWorld()->GetFirstPlayerController()));
+		}
+	}
+		
+}
+
+void ADXCharacter::UndoMove() {
+	if (LastMoveCommand) {
+		if (GEngine)
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, "DXCharacter: Last Movement Already Exists, Setting New Target");
+		UE_LOG(LogTemp, Warning, TEXT("DXCharacter: Last Movement Already Exists, Setting New Target"));
+		
+		if (LastMoveCommand->Undo()) {
+			if (GEngine)
+				GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, "DXCharacter: Performed Undo of Last Move");
+			UE_LOG(LogTemp, Warning, TEXT("DXCharacter: Performed Undo of Last Move"));
+			ControllerInteractionInterface->Execute_OnConfirmSuccess(Cast<AGridPlayerController>(GetWorld()->GetFirstPlayerController()));
+
+		}
+		else {
+			if (GEngine)
+				GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, "DXCharacter: Failed to Execute Move, with new Target");
+			UE_LOG(LogTemp, Warning, TEXT("DXCharacter: Failed to Execute New Move, with new Target"));
+			ControllerInteractionInterface->Execute_OnConfirmFail(Cast<AGridPlayerController>(GetWorld()->GetFirstPlayerController()));
+		}
+	}
+	
 }

@@ -20,8 +20,10 @@ public:
 
 	bool Step()
 	{
-		if (OpenSet.Num() == 0)
+		if (OpenSet.Num() == 0) {
+			UE_LOG(LogTemp, Warning, TEXT("FAStar::Step Failed, Open Set Length is 0"));
 			return false;
+		}
 
 		UGrid* Current = nullptr;
 		OpenSet.HeapPop(Current, Comparer);
@@ -123,8 +125,10 @@ public:
 
 	bool Step()
 	{
-		if (!ForwardAStar.Step())
+		if (!ForwardAStar.Step()) {
+			UE_LOG(LogTemp, Warning, TEXT("FBidirectionalAStar::Forward Step Failed"));
 			return false;
+		}
 
 		if (ForwardAStar.Succ)
 		{
@@ -132,8 +136,10 @@ public:
 		}
 		else
 		{
-			if (!BackwardAStar.Step())
+			if (!BackwardAStar.Step()) {
+				UE_LOG(LogTemp, Warning, TEXT("FBidirectionalAStar::Backward Step Failed"));
 				return false;
+			}
 
 			if (BackwardAStar.Succ)
 				IntersectGrid = BackwardAStar.Start;
@@ -210,13 +216,16 @@ bool UGridUtilities::FindPath(const FGridPathfindingRequest& Request, UGridPathF
 	int32 Step = 0;
 	while (!Succ)
 	{
-		if (!BidirectionalAStar.Step())
+		if (!BidirectionalAStar.Step()) {
+			UE_LOG(LogTemp, Warning, TEXT("AGridManager::FindPath failed, Step is False"));
 			break;
+		}
 
 		Succ = BidirectionalAStar.Succ;
 
 		if (++Step > Request.MaxSearchStep)
 		{
+			UE_LOG(LogTemp, Warning, TEXT("AGridManager::FindPath failed, out of MaxFindStep"));
 			LOG_WARNING(TEXT("AGridManager::FindPath failed, out of MaxFindStep"));
 			break;
 		}
@@ -224,6 +233,7 @@ bool UGridUtilities::FindPath(const FGridPathfindingRequest& Request, UGridPathF
 
 	if (Succ)
 	{
+		UE_LOG(LogTemp, Warning, TEXT("AGridManager::First Success on Find Path"));
 		BidirectionalAStar.CollectPath(Result);
 
 		if (Request.bRemoveDest)
@@ -246,6 +256,7 @@ bool UGridUtilities::FindPath(const FGridPathfindingRequest& Request, UGridPathF
 			if (i < Result.Num())
 			{
 				Result.RemoveAt(i, Result.Num() - i);
+				UE_LOG(LogTemp, Warning, TEXT("AGridManager::Find Path Fail"));
 				Succ = false;
 			}
 		}

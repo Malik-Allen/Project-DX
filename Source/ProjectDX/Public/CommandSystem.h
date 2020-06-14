@@ -3,24 +3,42 @@
 #pragma once
 
 #include "CoreMinimal.h"
-
 #include "UndoRedo/CommandManager.h"
-
-#include "GameFramework/Actor.h"
+#include "Components/ActorComponent.h"
+#include "CommandSystem.generated.h"
 
 class UGrid;
 class ADXCharacter;
 
-/**
- * 
- */
-class PROJECTDX_API CommandSystem
-{
+UCLASS()
+class PROJECTDX_API UCommandSystem : public UActorComponent {
+
+	GENERATED_BODY()
+
 public:
-	CommandSystem();
-	~CommandSystem();
+	UCommandSystem();
+	~UCommandSystem();
 
+	virtual void OnRegister() override;
 
+	CommandManager* command_manager;
+
+};
+
+class Cmd_MoveCharacterToGrid : public ICommand {
+	ADXCharacter* CharacterToMove;
+	UGrid* OriginalGrid;
+	UGrid* TargetGrid;
+
+public:
+	Cmd_MoveCharacterToGrid(ADXCharacter* TargetCharacter, UGrid* TargetGrid_);
+	~Cmd_MoveCharacterToGrid();
+
+	void SetTargetGrid(UGrid* TargetGrid_);
+
+	virtual bool Execute() override;
+	virtual bool Undo() override;
+	virtual void Redo() override;
 
 };
 
@@ -35,8 +53,8 @@ public:
 	Cmd_SpawnActorAtGrid(UObject* owner, UGrid* grid, TSubclassOf<ADXCharacter> actor, TArray<ADXCharacter*> list);
 	~Cmd_SpawnActorAtGrid();
 
-	virtual void Execute() override;
-	virtual void Undo() override;
+	virtual bool Execute() override;
+	virtual bool Undo() override;
 	virtual void Redo() override;
 
 };

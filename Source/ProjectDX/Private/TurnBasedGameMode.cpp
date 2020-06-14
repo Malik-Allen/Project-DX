@@ -7,6 +7,7 @@
 #include "UndoRedo/CommandManager.h"
 #include "Grid.h"
 #include "CommandSystem.h"
+#include "BasicGridInfo.h"
 
 ATurnBasedGameMode::ATurnBasedGameMode() :
 	Active_Character(nullptr),
@@ -161,4 +162,13 @@ void ATurnBasedGameMode::Undo() {
 
 void ATurnBasedGameMode::Redo() {
 	Command_Manager->Redo_Command();
+}
+
+void ATurnBasedGameMode::AssignCharacterToGrid(ADXCharacter* Character, UGrid* Grid) {
+	UBasicGridInfo* grid_info = nullptr;
+	if (Cast<UBasicGridInfo>(Grid->GridInfo)) {
+		grid_info = Cast<UBasicGridInfo>(Grid->GridInfo);
+		grid_info->Set_Occupant(Character);
+		Character->SetActorLocation(Grid->GetCenterSpawnableLocation());
+	}
 }
