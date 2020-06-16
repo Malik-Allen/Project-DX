@@ -82,6 +82,7 @@ public:
 	void Reset();
 	virtual void Reset_Implementation() {};
 
+	UPROPERTY(BlueprintReadOnly, Category = "GridPathFinder")
 	FGridPathfindingRequest Request;
 
 	UPROPERTY()
