@@ -18,6 +18,13 @@ enum class EControllerState : uint8 {
 	Placement		UMETA(DisplayName = "Placement")
 };
 
+UENUM(BlueprintType)
+enum class EActionState : uint8 {
+	None			UMETA(DisplayName = "None"),
+	Move			UMETA(DisplayName = "Move"),
+	Skill			UMETA(DisplayName = "Skill")
+};
+
 
 
 UCLASS(Transient)
@@ -65,22 +72,22 @@ public:
 
 	/*-----Grid Player Controller Functions-----*/
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, meta = (ToolTip = "Updating the Controller State will result in locking or unlocking the movement of the player pawn"))
 	void UpdateControllerState(EControllerState new_state);
 
 	UFUNCTION(BlueprintCallable)
 	EControllerState GetControllerState() const { return ControllerState; }
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, meta = (ToolTip = "Uses the currently targeted grid's occupant to assign to perform action"))
 	void AssignCharacterToPerformAction();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, meta = (ToolTip = "Character must be assigned for this to function"))
 	void MoveAssignedCharacterToCurrentGrid();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, meta = (ToolTip = "Will return the assigned character to the tile at the beging of their turn, if not occupied"))
 	void UndoMoveOnAssignedCharacter();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, meta = (ToolTip = "Clears the assigned character from the player controller"))
 	void ResetAssignedCharacter();
 
 

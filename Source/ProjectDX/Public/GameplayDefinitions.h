@@ -91,3 +91,15 @@ enum class EMovementDirection : uint8 {
 	Up		UMETA(DisplayName = "Up"),
 	Down	UMETA(DisplayName = "Down")
 };
+
+UENUM(BlueprintType)
+enum class EActionMovement : uint8 {
+	Stationary		UMETA(DisplayName = "Stationary"),
+	Moveable		UMETA(DisplayName = "Moveable")
+};
+
+UENUM(BlueprintType)
+enum class EActionTargeting : uint8 {
+	Single			UMETA(DisplayName = "Single Target"),
+	Multiple		UMETA(DisplayName = "Multiple Targets")
+};

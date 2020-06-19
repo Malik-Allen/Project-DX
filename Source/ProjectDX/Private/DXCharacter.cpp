@@ -8,6 +8,7 @@
 #include "InteractionInterface.h"
 #include "Engine/World.h"
 #include "GridPlayerController.h"
+#include "Actions.h"
 
 // Sets default values
 ADXCharacter::ADXCharacter() :
@@ -44,6 +45,7 @@ void ADXCharacter::BeginPlay()
 {
 	AssignAttributes();
 	ControllerInteractionInterface = Cast<AGridPlayerController>(GetWorld()->GetFirstPlayerController());
+	Register_Skills();
 	Super::BeginPlay();
 }
 
@@ -57,6 +59,19 @@ void ADXCharacter::Tick(float DeltaTime)
 void ADXCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+}
+
+// Registers the vector of subclasses of skills onto this actor
+void ADXCharacter::Register_Skills() {
+	for (TSubclassOf<USkill> Skill : Skills) {
+		RegisteredSkills.Add(NewObject<USkill>(this, Skill));
+	}
+
+	for (USkill* Skill : RegisteredSkills) {
+		Skill->OnRegister();
+		Skill->SetOwner(this);
+	}
 
 }
 
@@ -137,3 +152,4 @@ void ADXCharacter::UndoMove() {
 	}
 	
 }
+

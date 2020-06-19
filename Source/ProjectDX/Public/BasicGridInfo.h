@@ -31,6 +31,7 @@ public:
 
 	virtual void Clear_Implementation() override;
 
+	UFUNCTION(BlueprintCallable)
 	// Is this tile occupied
 	bool IsOccupied() const;
 
@@ -43,7 +44,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	ADXCharacter* Get_Occupant() const { return occupant; }
 
-
+	
 
 	
 };

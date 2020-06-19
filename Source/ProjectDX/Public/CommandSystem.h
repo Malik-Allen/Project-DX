@@ -38,7 +38,7 @@ public:
 
 	virtual bool Execute() override;
 	virtual bool Undo() override;
-	virtual void Redo() override;
+	virtual bool Redo() override;
 
 };
 
@@ -55,7 +55,7 @@ public:
 
 	virtual bool Execute() override;
 	virtual bool Undo() override;
-	virtual void Redo() override;
+	virtual bool Redo() override;
 
 };
 

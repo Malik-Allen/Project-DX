@@ -96,8 +96,9 @@ bool Cmd_MoveCharacterToGrid::Undo() {
 	return false;
 }
 
-void Cmd_MoveCharacterToGrid::Redo() {
+bool Cmd_MoveCharacterToGrid::Redo() {
 	// No Redo for move
+	return true;
 }
 
 
@@ -172,31 +173,37 @@ bool Cmd_SpawnActorAtGrid::Undo() {
 	return true;
 }
 
-void Cmd_SpawnActorAtGrid::Redo() {
+bool Cmd_SpawnActorAtGrid::Redo() {
 	if (Owner == nullptr)
-		return;
+		return false;
 
 	if (Grid == nullptr)
-		return;
+		return false;
 
 	if (Actor == nullptr)
-		return;
+		return false;
 
 	UBasicGridInfo* grid_info = nullptr;
 	if (Cast<UBasicGridInfo>(Grid->GridInfo)) {
 		grid_info = Cast<UBasicGridInfo>(Grid->GridInfo);
 		if (grid_info->IsOccupied())
-			return;
+			return false;
 	}
 	else {
-		return;
+		return false;
 	}
 
 	LocationToSpawn = Grid->GetCenterSpawnableLocation();
 
-	Actor->SetActorLocation(LocationToSpawn); 
-	Actor->SetActorHiddenInGame(false);
+	if (Actor->SetActorLocation(LocationToSpawn)) {
+		Actor->SetActorHiddenInGame(false);
+		grid_info->Set_Occupant(Actor);
+		return true;
+	}
+	else {
+		return false;
+	}
 
-	grid_info->Set_Occupant(Actor);
+
 
 }

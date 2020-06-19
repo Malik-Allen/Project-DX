@@ -8,7 +8,7 @@ public:
 	virtual ~ICommand() {}
 	virtual bool Execute() = 0;
 	virtual bool Undo() = 0;
-	virtual void Redo() = 0;
+	virtual bool Redo() = 0;
 };
 
 
@@ -39,12 +39,15 @@ public:
 		return true;
 	}
 
-	void Redo_Command() {
+	bool Redo_Command() {
 		if (redo_stack.size() <= 0)
-			return;
-		redo_stack.top()->Redo();
+			return false;
+		if(!redo_stack.top()->Redo())
+			return false;
 		undo_stack.push(redo_stack.top());
 		redo_stack.pop();
+		return true;
+		
 	}
 
 };

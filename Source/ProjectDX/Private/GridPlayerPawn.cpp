@@ -29,8 +29,6 @@ AGridPlayerPawn::AGridPlayerPawn() :
 	target_camera_rotation(FRotator()),
 	current_rotation_speed(0.0f),
 	camera_fixed_position(CAMERA_POSITION_ONE)
-	
-
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;

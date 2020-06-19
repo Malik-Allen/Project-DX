@@ -9,7 +9,6 @@
 #include "GameplayDefinitions.h"
 #include "CharacterStats.h"
 #include "ModifierSystem.h"
-#include "AbilitySystem.h"
 
 #include "DXCharacter.generated.h"
 
@@ -46,19 +45,32 @@ public:
 	UPROPERTY(Category = "Character Attributes", VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true", DisplayName = "Character Attributes"))
 	UCharacterAttributes* character_attributes;
 
-	UPROPERTY(Category = "Character Attributes", VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true", DisplayName = "Character Attributes"))
+	UPROPERTY(Category = "Grid Navigation", VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true", DisplayName = "Grid Navigation"))
 	class UGridNavigationComponent* GridNavigation;
 	
 	ModifierManager* modifier_manager;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Character")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Character", meta = (DisplayName = "Current Grid"))
 	class UGrid* current_grid;
 
 	UGrid* GridOnStartOfTurn;
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, meta = (BlueprintProtected), Category = "Character Attributes")
+	UPROPERTY(Category = "Character", EditDefaultsOnly, meta = (DisplayName = "Skills To Register"))
+	TArray<TSubclassOf<class USkill>> Skills;
+
+	UPROPERTY(Category = "Character", BlueprintReadOnly, meta = (DisplayName = "Character Skills"))
+	TArray<USkill*> RegisteredSkills;
+
+
+
+	/*----- Init Functions -----*/
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, meta = (BlueprintProtected, ToolTip = "Use this function to assign character attributes, this is called on begin play of character"), Category = "Character Attributes")
 		void AssignAttributes();
 	virtual void AssignAttributes_Implementation() {}
+
+	// Registers the vector of subclasses of skills onto this actor
+	void Register_Skills();
 
 
 
@@ -73,12 +85,10 @@ public:
 
 
 	/*----- Command Functions -----*/
-
 	
 	void MoveToGrid(UGrid* TargetGrid);
 
 	void UndoMove();
-
 
 private:
 
